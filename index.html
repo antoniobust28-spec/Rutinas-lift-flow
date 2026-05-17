@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIFT-FLOW · Rutina 5 Días v2</title>
+<title>LIFT-FLOW · Rutina 5 Días v3</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
@@ -25,6 +25,15 @@
   .mob-item{font-size:13px;color:#ccc;padding:5px 0;border-bottom:1px solid #1a1a1a;font-family:'Barlow',sans-serif;display:flex;align-items:flex-start;gap:8px;line-height:1.4}
   .mob-item:last-child{border-bottom:none}
   .mob-item::before{content:'•';color:#e63030;font-size:16px;line-height:1;flex-shrink:0}
+  .sets-table{width:100%;border:1px solid #1e1e1e;overflow:hidden}
+  .sets-header{display:grid;grid-template-columns:1fr 60px 80px;background:#141414;padding:8px 12px;font-size:10px;color:#555;letter-spacing:2px;font-weight:700;border-bottom:1px solid #1e1e1e}
+  .set-row{display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a;align-items:center;transition:background .15s}
+  .set-row:last-child{border-bottom:none}
+  .set-row:hover{background:rgba(230,48,48,.05)}
+  .set-row:nth-child(odd){background:#0e0e0e}
+  .set-reps{text-align:center;font-size:14px;font-weight:700;color:#e63030;font-family:'Barlow Condensed',sans-serif}
+  .set-pct{text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif}
+  .set-series{font-size:13px;color:#aaa;font-family:'Barlow',sans-serif}
   .ex-table{border:1px solid #1e1e1e;overflow:hidden;width:100%}
   .ex-table-header{display:grid;grid-template-columns:1fr 50px 70px 55px 30px;background:#141414;padding:9px 12px;font-size:10px;color:#555;letter-spacing:2px;font-weight:700;border-bottom:1px solid #1e1e1e}
   .ex-row{transition:background .15s}
@@ -38,15 +47,9 @@
   .info-btn.open{background:rgba(230,48,48,.2);border-color:#e63030;color:#e63030}
   .note-row{padding:7px 12px 10px;background:rgba(230,48,48,.05);border-top:1px solid rgba(230,48,48,.15);font-size:12px;color:#e08080;font-family:'Barlow',sans-serif;font-style:italic;display:none}
   .note-row.open{display:block}
-  .section-divider{display:flex;align-items:center;gap:10px;padding:6px 12px;background:#111;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;margin:4px 0}
-  .section-divider .line{flex:1;height:1px;background:rgba(230,48,48,.2)}
-  .section-divider span{font-size:9px;letter-spacing:3px;color:#e63030;font-weight:700;text-transform:uppercase}
   .tag-badge{background:rgba(230,48,48,.15);border:1px solid #e63030;color:#e63030;padding:5px 12px;font-size:10px;letter-spacing:2px;font-weight:700;text-transform:uppercase}
   .pill{background:rgba(230,48,48,.15);border:1px solid rgba(230,48,48,.4);color:#e63030;font-size:11px;letter-spacing:2px;font-weight:700;padding:4px 10px;text-transform:uppercase;display:inline-block;margin:2px}
-  .rm-box{background:#111;border:1px solid #2a2a2a;border-left:3px solid #e63030;border-top:2px solid #e63030;padding:12px 14px;margin-bottom:4px}
-  .rm-box-title{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;color:#e63030;font-weight:700;text-transform:uppercase;margin-bottom:8px}
-  .rm-highlight{font-size:18px;font-weight:900;color:#fff;font-family:'Barlow Condensed',sans-serif}
-  .rest-badge{display:inline-block;background:rgba(230,48,48,.1);border:1px solid rgba(230,48,48,.3);color:#e63030;font-size:10px;padding:3px 8px;letter-spacing:1px;font-weight:700;margin:6px 0;font-family:'Barlow Condensed',sans-serif}
+  .science-badge{display:inline-block;background:rgba(230,48,48,.12);border:1px solid rgba(230,48,48,.3);color:#e63030;font-size:9px;padding:2px 7px;letter-spacing:1.5px;font-weight:700;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;margin-left:6px;vertical-align:middle}
   @media(max-width:420px){
     .ex-table-header,.ex-row-grid{grid-template-columns:1fr 40px 60px 45px 26px}
     .ex-name{font-size:12px}
@@ -78,7 +81,7 @@
   <button class="tab-btn" onclick="showDay(4,this)"><div style="font-size:9px;opacity:.6;letter-spacing:2px">DÍA 5</div>VIE</button>
 </div>
 
-<!-- DÍA 1 · LUNES · HOMBRO COMPLETO + PECHO -->
+<!-- DÍA 1 -->
 <div id="day-0" class="day-panel active">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
     <div>
@@ -89,12 +92,12 @@
   </div>
 
   <div class="block">
-    <div class="rm-box">
-      <div class="rm-box-title">⚡ Buscar 1RM — Press de Banca</div>
-      <div style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif;line-height:1.7">
-        Trabaja en rampa hasta encontrar tu <span class="rm-highlight">1RM</span> del día.<br>
-        Luego: <span class="rm-highlight">2×6–8</span> al <span class="rm-highlight">68%</span> del 1RM encontrado.
-      </div>
+    <div class="block-title">Press de Banca — % del 1RM</div>
+    <div class="sets-table">
+      <div class="sets-header"><span>SERIE</span><span style="text-align:center">REPS</span><span style="text-align:center">%RM</span></div>
+      <div class="set-row"><div class="set-series">Serie 1</div><div class="set-reps">10</div><div class="set-pct">60%</div></div>
+      <div class="set-row"><div class="set-series">Serie 2</div><div class="set-reps">8</div><div class="set-pct">65%</div></div>
+      <div class="set-row"><div class="set-series">Series 3–5</div><div class="set-reps">6–8</div><div class="set-pct">68%</div></div>
     </div>
   </div>
 
@@ -143,18 +146,18 @@
     <div class="mob-list">
       <div class="mob-item">3×1 min — Plancha frontal con peso</div>
       <div class="mob-item">3×15 — Crunch en suelo</div>
-      <div class="mob-item">3×12–15 — Extensiones lumbares (hyperextension)</div>
+      <div class="mob-item">3×12–15 — Extensiones lumbares</div>
     </div>
   </div>
   <div style="margin-top:8px;font-size:11px;color:#555">📋 Duración estimada: ~75–85 min</div>
 </div>
 
-<!-- DÍA 2 · MARTES · ESPALDA + BÍCEPS -->
+<!-- DÍA 2 -->
 <div id="day-1" class="day-panel">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
     <div>
       <div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700">DÍA 2 · MARTES</div>
-      <div style="font-size:22px;font-weight:900;text-transform:uppercase">ESPALDA + BÍCEPS</div>
+      <div style="font-size:22px;font-weight:900;text-transform:uppercase">ESPALDA + BÍCEPS + TRÍCEPS</div>
     </div>
     <span class="tag-badge">JALÓN</span>
   </div>
@@ -165,12 +168,25 @@
     <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Remo en polea baja (cable row)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">75s</div><div></div></div></div>
     <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Pull-over con mancuerna</div><div class="ex-sets">3</div><div class="ex-data">12</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Expande caja torácica</div></div>
     <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Curl con barra EZ</div><div class="ex-sets">3</div><div class="ex-data">10–12</div><div class="ex-rest">60s</div><div></div></div></div>
-    <div class="ex-row" style="background:#0e0e0e"><div class="ex-row-grid"><div class="ex-name">Curl martillo alternado</div><div class="ex-sets">3</div><div class="ex-data">10–12 c/u</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo fijo</div></div>
+    <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Curl martillo alternado</div><div class="ex-sets">3</div><div class="ex-data">10–12 c/u</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo fijo</div></div>
   </div>
-  <div style="margin-top:8px;font-size:11px;color:#555">📋 6 ejercicios · Duración estimada: ~55–65 min</div>
+
+  <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#111;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;margin:4px 0">
+    <div style="flex:1;height:1px;background:rgba(230,48,48,.25)"></div>
+    <span style="font-size:9px;letter-spacing:3px;color:#e63030;font-weight:700;text-transform:uppercase">TRÍCEPS 🔬 CIENCIA</span>
+    <div style="flex:1;height:1px;background:rgba(230,48,48,.25)"></div>
+  </div>
+
+  <div class="ex-table">
+    <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
+    <div class="ex-row" style="background:#180808;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press francés con barra EZ <span class="science-badge">#1</span></div><div class="ex-sets">4</div><div class="ex-data">10–12</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Mayor activación de cabeza larga del tríceps. Codos fijos, control total en excéntrico</div></div>
+    <div class="ex-row" style="background:#110808;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Extensiones en polea con cuerda <span class="science-badge">#2</span></div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Tensión constante + full extensión. Separar la cuerda al fondo para mayor contracción</div></div>
+    <div class="ex-row" style="background:#180808"><div class="ex-row-grid"><div class="ex-name">Fondos en paralelas <span class="science-badge">#3</span></div><div class="ex-sets">3</div><div class="ex-data">Max / lastrado</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Multiarticular, mayor carga. Torso vertical para enfocarlo en tríceps, no pecho</div></div>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:#555">📋 9 ejercicios · Duración estimada: ~65–75 min</div>
 </div>
 
-<!-- DÍA 3 · MIÉRCOLES · HOMBRO COMPLETO -->
+<!-- DÍA 3 -->
 <div id="day-2" class="day-panel">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
     <div>
@@ -181,12 +197,12 @@
   </div>
   <div class="block">
     <div class="block-title">A) Fuerza — Press Vertical</div>
-    <div style="background:#0e0e0e;border:1px solid #1e1e1e;overflow:hidden">
-      <div style="display:grid;grid-template-columns:1fr 60px 80px;background:#141414;padding:8px 12px;font-size:10px;color:#555;letter-spacing:2px;font-weight:700;border-bottom:1px solid #1e1e1e"><span>SERIE</span><span style="text-align:center">REPS</span><span style="text-align:center">%RM</span></div>
-      <div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Serie 1</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">5</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">60%</span></div>
-      <div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a;background:#111"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Serie 2</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">4</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">70%</span></div>
-      <div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Serie 3</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">3</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">75%</span></div>
-      <div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;background:#111"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Series 4–6</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">2–3</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">80%</span></div>
+    <div class="sets-table">
+      <div class="sets-header"><span>SERIE</span><span style="text-align:center">REPS</span><span style="text-align:center">%RM</span></div>
+      <div class="set-row"><div class="set-series">Serie 1</div><div class="set-reps">5</div><div class="set-pct">60%</div></div>
+      <div class="set-row"><div class="set-series">Serie 2</div><div class="set-reps">4</div><div class="set-pct">70%</div></div>
+      <div class="set-row"><div class="set-series">Serie 3</div><div class="set-reps">3</div><div class="set-pct">75%</div></div>
+      <div class="set-row"><div class="set-series">Series 4–6</div><div class="set-reps">2–3</div><div class="set-pct">80%</div></div>
     </div>
   </div>
   <div class="block">
@@ -212,7 +228,7 @@
   <div style="margin-top:8px;font-size:11px;color:#555">📋 Duración estimada: ~65–75 min</div>
 </div>
 
-<!-- DÍA 4 · JUEVES · PECHO UPPER + ESPALDA UPPER -->
+<!-- DÍA 4 -->
 <div id="day-3" class="day-panel">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
     <div>
@@ -228,13 +244,13 @@
     <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Aperturas inclinadas con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div></div></div></div>
     <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Remo en máquina (chest supported)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Sin trapecio</div></div>
     <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Crossover en polea baja (pecho bajo)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div></div></div></div>
-    <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Jalón polea al pecho a una mano</div><div class="ex-sets">3</div><div class="ex-data">12 c/u</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo fijo, rotación del torso controlada, mayor rango de movimiento unilateral</div></div>
-    <div class="ex-row" style="background:#111"><div class="ex-row-grid"><div class="ex-name">Encogimientos de hombros con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Trapecio superior</div></div>
+    <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Jalón polea al pecho a una mano</div><div class="ex-sets">3</div><div class="ex-data">12 c/u</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo fijo, rotación del torso controlada</div></div>
+    <div class="ex-row"><div class="ex-row-grid"><div class="ex-name">Encogimientos de hombros con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Trapecio superior</div></div>
   </div>
   <div style="margin-top:8px;font-size:11px;color:#555">📋 7 ejercicios · Duración estimada: ~60–70 min</div>
 </div>
 
-<!-- DÍA 5 · VIERNES · PIERNA COMPLETA -->
+<!-- DÍA 5 -->
 <div id="day-4" class="day-panel">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
     <div>
@@ -245,12 +261,12 @@
   </div>
 
   <div class="block">
-    <div class="rm-box">
-      <div class="rm-box-title">⚡ Buscar 1RM — Sentadilla con Barra</div>
-      <div style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif;line-height:1.7">
-        Trabaja en rampa hasta encontrar tu <span class="rm-highlight">1RM</span> del día.<br>
-        Profundidad paralelo o más. Core apretado en todo momento.
-      </div>
+    <div class="block-title">Sentadilla con Barra — % del 1RM</div>
+    <div class="sets-table">
+      <div class="sets-header"><span>SERIE</span><span style="text-align:center">REPS</span><span style="text-align:center">%RM</span></div>
+      <div class="set-row"><div class="set-series">Serie 1</div><div class="set-reps">10</div><div class="set-pct">60%</div></div>
+      <div class="set-row"><div class="set-series">Serie 2</div><div class="set-reps">8</div><div class="set-pct">65%</div></div>
+      <div class="set-row"><div class="set-series">Series 3–5</div><div class="set-reps">6–8</div><div class="set-pct">68%</div></div>
     </div>
   </div>
 
@@ -258,9 +274,7 @@
     <div class="block-title">A) Cuádriceps</div>
     <div class="ex-table">
       <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Prensa de piernas</div><div class="ex-sets">4</div><div class="ex-data">10–12</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pies centrales, no bloquear rodilla</div></div>
-      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Extensión de cuádriceps en máquina</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 No bloquear rodilla, pausa arriba 1s</div></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Zancadas con mancuernas (walking lunges)</div><div class="ex-sets">3</div><div class="ex-data">12 c/u</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Rodilla trasera cerca del suelo</div></div>
+      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Extensión de cuádriceps en máquina</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 No bloquear rodilla, pausa arriba 1s</div></div>
     </div>
   </div>
 
@@ -269,9 +283,9 @@
     <div class="ex-table">
       <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
       <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Romanian Deadlift (RDL)</div><div class="ex-sets">4</div><div class="ex-data">8–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Estiramiento completo de isquio</div></div>
-      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Hip thrust con barra</div><div class="ex-sets">4</div><div class="ex-data">10–12</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Empuje de cadera completo, pausa arriba 1s</div></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Curl de isquiotibiales (tumbado)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div></div></div></div>
-      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Sentadilla búlgara con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">10 c/u</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pie trasero elevado, rodilla trasera cerca del suelo</div></div>
+      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Curl de isquiotibiales (tumbado)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div></div></div></div>
+      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Sentadilla búlgara con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">10 c/u</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pie trasero elevado, rodilla trasera cerca del suelo</div></div>
+      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Abductores en máquina</div><div class="ex-sets">3</div><div class="ex-data">15</div><div class="ex-rest">45s</div><div></div></div></div>
     </div>
   </div>
 
@@ -283,7 +297,7 @@
       <div class="ex-row" style="background:#0e0e0e"><div class="ex-row-grid"><div class="ex-name">Elevación de gemelos sentado</div><div class="ex-sets">3</div><div class="ex-data">15–20</div><div class="ex-rest">45s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Cabeza del sóleo</div></div>
     </div>
   </div>
-  <div style="margin-top:8px;font-size:11px;color:#555">📋 11 ejercicios + 1RM · Duración estimada: ~75–85 min</div>
+  <div style="margin-top:8px;font-size:11px;color:#555">📋 9 ejercicios · Duración estimada: ~70–80 min</div>
 </div>
 
 <!-- FOOTER -->
