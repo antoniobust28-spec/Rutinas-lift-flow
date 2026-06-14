@@ -14,7 +14,7 @@
   @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
   .tabs{display:flex;overflow-x:auto;border-bottom:1px solid #222;background:#0e0e0e;scrollbar-width:none}
   .tabs::-webkit-scrollbar{display:none}
-  .tab-btn{padding:12px 16px;font-size:11px;font-weight:700;letter-spacing:1.5px;font-family:'Barlow Condensed',sans-serif;border-right:1px solid #1a1a1a;min-width:80px;text-align:center;text-transform:uppercase;color:#555;transition:all .2s;white-space:nowrap;border-top:none;border-bottom:none;border-left:none;cursor:pointer;background:transparent}
+  .tab-btn{padding:12px 16px;font-size:11px;font-weight:700;letter-spacing:1.5px;font-family:'Barlow Condensed',sans-serif;border-right:1px solid #1a1a1a;min-width:70px;text-align:center;text-transform:uppercase;color:#555;transition:all .2s;white-space:nowrap;border-top:none;border-bottom:none;border-left:none;cursor:pointer;background:transparent}
   .tab-btn.active{background:#e63030;color:#fff}
   .tab-btn:hover:not(.active){color:#e63030}
   .day-panel{display:none;padding:18px 14px;animation:fadeIn .3s ease forwards}
@@ -50,6 +50,18 @@
   .tag-badge{background:rgba(230,48,48,.15);border:1px solid #e63030;color:#e63030;padding:5px 12px;font-size:10px;letter-spacing:2px;font-weight:700;text-transform:uppercase}
   .pill{background:rgba(230,48,48,.15);border:1px solid rgba(230,48,48,.4);color:#e63030;font-size:11px;letter-spacing:2px;font-weight:700;padding:4px 10px;text-transform:uppercase;display:inline-block;margin:2px}
   .science-badge{display:inline-block;background:rgba(230,48,48,.12);border:1px solid rgba(230,48,48,.3);color:#e63030;font-size:9px;padding:2px 7px;letter-spacing:1.5px;font-weight:700;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;margin-left:6px;vertical-align:middle}
+  .reg-table{width:100%;border:1px solid #1e1e1e;overflow:hidden}
+  .reg-header{display:grid;grid-template-columns:1fr 1fr;background:#141414;padding:8px 12px;font-size:9px;color:#555;letter-spacing:1.5px;font-weight:700;border-bottom:1px solid #1e1e1e;text-transform:uppercase}
+  .reg-row{display:grid;grid-template-columns:1fr 1fr;padding:10px 12px;border-bottom:1px solid #1a1a1a;align-items:center;gap:8px}
+  .reg-row:last-child{border-bottom:none}
+  .reg-row:nth-child(odd){background:#0e0e0e}
+  .reg-label{font-size:13px;font-weight:600;color:#ccc;font-family:'Barlow Condensed',sans-serif}
+  .reg-input{background:#0a0a0a;border:1px solid #2a2a2a;color:#f0f0f0;font-size:12px;padding:6px 10px;width:100%;font-family:'Barlow',sans-serif}
+  .reg-input:focus{outline:none;border-color:#e63030}
+  .reg-textarea{background:#0a0a0a;border:1px solid #2a2a2a;color:#f0f0f0;font-size:12px;padding:6px 10px;width:100%;font-family:'Barlow',sans-serif;resize:vertical;min-height:60px}
+  .reg-textarea:focus{outline:none;border-color:#e63030}
+  .send-btn{width:100%;background:#e63030;color:#fff;border:none;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:12px}
+  .send-btn:hover{background:#c42020}
   @media(max-width:420px){
     .ex-table-header,.ex-row-grid{grid-template-columns:1fr 40px 60px 45px 26px}
     .ex-name{font-size:12px}
@@ -57,8 +69,6 @@
 </style>
 </head>
 <body>
-
-<!-- HEADER -->
 <div style="background:linear-gradient(135deg,#0a0a0a,#1a0808,#0a0a0a);border-bottom:2px solid #e63030;padding:22px 16px;text-align:center;position:relative;overflow:hidden">
   <div style="position:absolute;top:0;right:0;width:180px;height:180px;background:radial-gradient(circle,rgba(230,48,48,.12),transparent 70%);pointer-events:none"></div>
   <div style="background:#fff;border-radius:8px;padding:8px 18px;max-width:200px;margin:0 auto 14px;display:inline-block">
@@ -70,239 +80,80 @@
     <span class="pill">Hipertrofia</span><span class="pill">Hombro x2</span><span class="pill">Pierna completa</span><span class="pill">Fuerza</span>
   </div>
 </div>
-
-<!-- TABS -->
 <div class="tabs">
   <button class="tab-btn active" onclick="showDay(0,this)"><div style="font-size:9px;opacity:.6;letter-spacing:2px">DÍA 1</div>LUN</button>
   <button class="tab-btn" onclick="showDay(1,this)"><div style="font-size:9px;opacity:.6;letter-spacing:2px">DÍA 2</div>MAR</button>
   <button class="tab-btn" onclick="showDay(2,this)"><div style="font-size:9px;opacity:.6;letter-spacing:2px">DÍA 3</div>MIÉ</button>
   <button class="tab-btn" onclick="showDay(3,this)"><div style="font-size:9px;opacity:.6;letter-spacing:2px">DÍA 4</div>JUE</button>
   <button class="tab-btn" onclick="showDay(4,this)"><div style="font-size:9px;opacity:.6;letter-spacing:2px">DÍA 5</div>VIE</button>
+  <button class="tab-btn" onclick="showDay(5,this)"><div style="font-size:9px;opacity:.6;letter-spacing:2px">LOG</div>REGISTRO</button>
 </div>
 
 <!-- DÍA 1 -->
 <div id="day-0" class="day-panel active">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-    <div>
-      <div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700">DÍA 1 · LUNES</div>
-      <div style="font-size:22px;font-weight:900;text-transform:uppercase">HOMBRO COMPLETO + PECHO</div>
-    </div>
-    <span class="tag-badge">EMPUJE</span>
-  </div>
-
-  <div class="block">
-    <div style="background:#111;border:1px solid #2a2a2a;border-left:3px solid #e63030;border-top:2px solid #e63030;padding:12px 14px;margin-bottom:4px">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;color:#e63030;font-weight:700;text-transform:uppercase;margin-bottom:8px">Press de Banca — % del 1RM</div>
-      <div style="background:#0e0e0e;border:1px solid #1e1e1e;overflow:hidden">
-        <div style="display:grid;grid-template-columns:1fr 60px 80px;background:#141414;padding:8px 12px;font-size:10px;color:#555;letter-spacing:2px;font-weight:700;border-bottom:1px solid #1e1e1e"><span>SERIE</span><span style="text-align:center">REPS</span><span style="text-align:center">%RM</span></div>
-        <div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Serie 1</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">10</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">60%</span></div>
-        <div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a;background:#111"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Serie 2</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">8</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">65%</span></div>
-        <div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Series 3–5</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">6–8</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">68%</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-title">A) Hombro — Deltoides Anterior</div>
-    <div class="ex-table">
-      <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press militar con barra (standing)</div><div class="ex-sets">4</div><div class="ex-data">8–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Core apretado, sin arquear la espalda</div></div>
-      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press Arnold KB</div><div class="ex-sets">4</div><div class="ex-data">10–12</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Rotación completa, codos altos al final</div></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Elevaciones frontales con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Brazos casi rectos, sube hasta altura del hombro</div></div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-title">B) Hombro — Deltoides Lateral</div>
-    <div class="ex-table">
-      <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Elevaciones laterales con mancuernas</div><div class="ex-sets">4</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo ligeramente doblado, no subir más allá del hombro</div></div>
-      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Jalones al mentón (agarre abierto)</div><div class="ex-sets">3</div><div class="ex-data">12</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Agarre ancho, codos sobre las muñecas</div></div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-title">C) Hombro — Deltoides Posterior</div>
-    <div class="ex-table">
-      <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Face pulls en polea alta (cuerda)</div><div class="ex-sets">4</div><div class="ex-data">15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Rotación externa, codos altos, pausa en el pico</div></div>
-      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Pájaro / Peck deck invertida</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Deltoides posterior, no trapecio</div></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Elevaciones en Y (mancuernas)</div><div class="ex-sets">3</div><div class="ex-data">12</div><div class="ex-rest">45s</div><div></div></div></div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-title">D) Pecho + Tríceps</div>
-    <div class="ex-table">
-      <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Aperturas en polea alta (cable fly)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Squeeze en el centro, no bloquear codos</div></div>
-      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Fondos en paralelas</div><div class="ex-sets">3</div><div class="ex-data">10–12</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Ligera inclinación al frente para pecho</div></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Extensiones de tríceps en polea (cuerda)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Full extensión, separar la cuerda al fondo</div></div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-title">ZONA CORE</div>
-    <div class="mob-list">
-      <div class="mob-item">3×1 min — Plancha frontal con peso</div>
-      <div class="mob-item">3×15 — Crunch en suelo</div>
-      <div class="mob-item">3×12–15 — Extensiones lumbares</div>
-    </div>
-  </div>
-  <div style="margin-top:8px;font-size:11px;color:#555">📋 Duración estimada: ~75–85 min</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700">DÍA 1 · LUNES</div><div style="font-size:22px;font-weight:900;text-transform:uppercase">HOMBRO COMPLETO + PECHO</div></div><span class="tag-badge">EMPUJE</span></div>
+  <div class="block"><div style="background:#111;border:1px solid #2a2a2a;border-left:3px solid #e63030;border-top:2px solid #e63030;padding:12px 14px;margin-bottom:4px"><div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;color:#e63030;font-weight:700;text-transform:uppercase;margin-bottom:8px">Press de Banca — % del 1RM</div><div style="background:#0e0e0e;border:1px solid #1e1e1e;overflow:hidden"><div style="display:grid;grid-template-columns:1fr 60px 80px;background:#141414;padding:8px 12px;font-size:10px;color:#555;letter-spacing:2px;font-weight:700;border-bottom:1px solid #1e1e1e"><span>SERIE</span><span style="text-align:center">REPS</span><span style="text-align:center">%RM</span></div><div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Serie 1</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">10</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">60%</span></div><div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a;background:#111"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Serie 2</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">8</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">65%</span></div><div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Series 3–5</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">5–8</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">75%</span></div></div></div></div>
+  <div class="block"><div class="block-title">A) Hombro — Deltoides Anterior</div><div class="ex-table"><div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESC.</span><span></span></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press militar con barra (standing)</div><div class="ex-sets">4</div><div class="ex-data">8–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Core apretado, sin arquear la espalda</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press banca inclinado con mancuernas</div><div class="ex-sets">4</div><div class="ex-data">10</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pecho alto, inclinación 30–45°</div></div><div class="ex-row"><div class="ex-row-grid"><div class="ex-name">Elevaciones frontales con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Brazos casi rectos, sube hasta altura del hombro</div></div></div></div>
+  <div class="block"><div class="block-title">B) Hombro — Deltoides Lateral</div><div class="ex-table"><div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESC.</span><span></span></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Elevaciones laterales con mancuernas</div><div class="ex-sets">4</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo ligeramente doblado</div></div><div class="ex-row" style="background:#0e0e0e"><div class="ex-row-grid"><div class="ex-name">Jalones al mentón (agarre abierto)</div><div class="ex-sets">3</div><div class="ex-data">12</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Agarre ancho, codos sobre las muñecas</div></div></div></div>
+  <div class="block"><div class="block-title">C) Hombro — Deltoides Posterior</div><div class="ex-table"><div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESC.</span><span></span></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Face pulls en polea alta (cuerda)</div><div class="ex-sets">4</div><div class="ex-data">15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Rotación externa, codos altos, pausa en el pico</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Pájaro / Peck deck invertida</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Deltoides posterior, no trapecio</div></div><div class="ex-row"><div class="ex-row-grid"><div class="ex-name">Crossover en polea baja</div><div class="ex-sets">3</div><div class="ex-data">10–12</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Desde abajo hacia arriba, squeeze en el pico</div></div></div></div>
+  <div class="block"><div class="block-title">D) Pecho + Tríceps</div><div class="ex-table"><div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESC.</span><span></span></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Aperturas en polea alta (cable fly)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Squeeze en el centro, no bloquear codos</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Fondos en paralelas</div><div class="ex-sets">3</div><div class="ex-data">8–12</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Ligera inclinación al frente para pecho</div></div><div class="ex-row"><div class="ex-row-grid"><div class="ex-name">Extensiones de tríceps en polea (cuerda)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Full extensión, separar la cuerda al fondo</div></div></div></div>
+  <div class="block"><div class="block-title">ZONA CORE</div><div class="mob-list"><div class="mob-item">3×1 min — Plancha frontal con peso</div><div class="mob-item">3×15 — Crunch en suelo</div><div class="mob-item">3×12–15 — Extensiones lumbares</div></div></div>
 </div>
 
 <!-- DÍA 2 -->
 <div id="day-1" class="day-panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-    <div>
-      <div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700">DÍA 2 · MARTES</div>
-      <div style="font-size:22px;font-weight:900;text-transform:uppercase">ESPALDA + BÍCEPS + TRÍCEPS</div>
-    </div>
-    <span class="tag-badge">JALÓN</span>
-  </div>
-  <div class="ex-table">
-    <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-    <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Jalón al pecho (agarre ancho)</div><div class="ex-sets">4</div><div class="ex-data">8–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codos hacia atrás y abajo</div></div>
-    <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Remo con barra (Barbell row)</div><div class="ex-sets">4</div><div class="ex-data">8–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Espalda neutral, no redondear</div></div>
-    <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Remo en punta</div><div class="ex-sets">3</div><div class="ex-data">8–10</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Barra fija en el suelo, agarre neutro, codo pegado al cuerpo</div></div>
-    <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Pull-over con mancuerna</div><div class="ex-sets">3</div><div class="ex-data">12</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Expande caja torácica</div></div>
-    <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Curl con barra EZ</div><div class="ex-sets">3</div><div class="ex-data">10–12</div><div class="ex-rest">60s</div><div></div></div></div>
-    <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Curl martillo alternado</div><div class="ex-sets">3</div><div class="ex-data">10–12 c/u</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo fijo</div></div>
-  </div>
-
-  <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#111;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;margin:4px 0">
-    <div style="flex:1;height:1px;background:rgba(230,48,48,.25)"></div>
-    <span style="font-size:9px;letter-spacing:3px;color:#e63030;font-weight:700;text-transform:uppercase">TRÍCEPS 🔬 CIENCIA</span>
-    <div style="flex:1;height:1px;background:rgba(230,48,48,.25)"></div>
-  </div>
-
-  <div class="ex-table">
-    <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-    <div class="ex-row" style="background:#180808;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press francés con barra EZ <span class="science-badge">#1</span></div><div class="ex-sets">4</div><div class="ex-data">10–12</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Mayor activación de cabeza larga. Codos fijos, control total en excéntrico</div></div>
-    <div class="ex-row" style="background:#110808;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Extensiones en polea con cuerda <span class="science-badge">#2</span></div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Tensión constante + full extensión. Separar la cuerda al fondo</div></div>
-    <div class="ex-row" style="background:#180808"><div class="ex-row-grid"><div class="ex-name">Fondos en paralelas <span class="science-badge">#3</span></div><div class="ex-sets">3</div><div class="ex-data">Max / lastrado</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Torso vertical para enfocarlo en tríceps</div></div>
-  </div>
-  <div style="margin-top:8px;font-size:11px;color:#555">📋 9 ejercicios · Duración estimada: ~65–75 min</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700">DÍA 2 · MARTES</div><div style="font-size:22px;font-weight:900;text-transform:uppercase">ESPALDA + BÍCEPS + TRÍCEPS</div></div><span class="tag-badge">JALÓN</span></div>
+  <div class="ex-table"><div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESC.</span><span></span></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Jalón al pecho (agarre ancho)</div><div class="ex-sets">4</div><div class="ex-data">8–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codos hacia atrás y abajo</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Remo con barra (Barbell row)</div><div class="ex-sets">4</div><div class="ex-data">8–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Espalda neutral, no redondear</div></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Remo en punta</div><div class="ex-sets">3</div><div class="ex-data">8–10</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Agarre neutro, codo pegado al cuerpo</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Remo con mancuerna a una mano</div><div class="ex-sets">4</div><div class="ex-data">10/10</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Apoyo en banco, codo pegado, squeeze al final</div></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Pull-over con mancuerna</div><div class="ex-sets">3</div><div class="ex-data">12</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Expande caja torácica</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Curl con barra EZ</div><div class="ex-sets">3</div><div class="ex-data">10–12</div><div class="ex-rest">60s</div><div></div></div></div><div class="ex-row"><div class="ex-row-grid"><div class="ex-name">Curl martillo alternado</div><div class="ex-sets">3</div><div class="ex-data">10–12 c/u</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo fijo</div></div></div>
+  <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#111;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;margin:4px 0"><div style="flex:1;height:1px;background:rgba(230,48,48,.25)"></div><span style="font-size:9px;letter-spacing:3px;color:#e63030;font-weight:700;text-transform:uppercase">TRÍCEPS 🔬 CIENCIA</span><div style="flex:1;height:1px;background:rgba(230,48,48,.25)"></div></div>
+  <div class="ex-table"><div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESC.</span><span></span></div><div class="ex-row" style="background:#180808;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press francés con barra EZ <span class="science-badge">#1</span></div><div class="ex-sets">4</div><div class="ex-data">10–12</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Mayor activación de cabeza larga. Codos fijos, control en excéntrico</div></div><div class="ex-row" style="background:#110808;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Extensiones polea con cuerda <span class="science-badge">#2</span></div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Tensión constante + full extensión</div></div><div class="ex-row" style="background:#180808"><div class="ex-row-grid"><div class="ex-name">Copa tras nuca <span class="science-badge">#3</span></div><div class="ex-sets">3</div><div class="ex-data">10–12</div><div class="ex-rest">75s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Estiramiento máximo de cabeza larga, codos al techo</div></div></div>
 </div>
 
 <!-- DÍA 3 -->
 <div id="day-2" class="day-panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-    <div>
-      <div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700">DÍA 3 · MIÉRCOLES</div>
-      <div style="font-size:22px;font-weight:900;text-transform:uppercase">HOMBRO COMPLETO</div>
-    </div>
-    <span class="tag-badge">DELTOIDES</span>
-  </div>
-  <div class="block">
-    <div class="block-title">A) Fuerza — Press Vertical</div>
-    <div class="sets-table">
-      <div class="sets-header"><span>SERIE</span><span style="text-align:center">REPS</span><span style="text-align:center">%RM</span></div>
-      <div class="set-row"><div class="set-series">Serie 1</div><div class="set-reps">5</div><div class="set-pct">60%</div></div>
-      <div class="set-row"><div class="set-series">Serie 2</div><div class="set-reps">4</div><div class="set-pct">70%</div></div>
-      <div class="set-row"><div class="set-series">Serie 3</div><div class="set-reps">3</div><div class="set-pct">75%</div></div>
-      <div class="set-row"><div class="set-series">Series 4–6</div><div class="set-reps">2–3</div><div class="set-pct">80%</div></div>
-    </div>
-  </div>
-  <div class="block">
-    <div class="block-title">B) Deltoides Lateral + Posterior</div>
-    <div class="ex-table">
-      <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Elevaciones laterales con mancuernas</div><div class="ex-sets">4</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo ligeramente doblado</div></div>
-      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Face pulls en polea alta</div><div class="ex-sets">4</div><div class="ex-data">15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Rotación externa, codos altos</div></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Pájaro con mancuernas (inclinado)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pecho apoyado en banco, deltoides posterior</div></div>
-      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press militar sentado (mancuernas)</div><div class="ex-sets">3</div><div class="ex-data">10–12</div><div class="ex-rest">75s</div><div></div></div></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Sott press (barra)</div><div class="ex-sets">3</div><div class="ex-data">10</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Movilidad de hombro, posición de sentadilla</div></div>
-      <div class="ex-row" style="background:#0e0e0e"><div class="ex-row-grid"><div class="ex-name">Encogimientos de hombros (mancuernas)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">45s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Trapecio superior, pausa arriba 1s</div></div>
-    </div>
-  </div>
-  <div class="block">
-    <div class="block-title">ZONA CORE</div>
-    <div class="mob-list">
-      <div class="mob-item">3×8/8 — Press Pallof</div>
-      <div class="mob-item">3×20 — Dead bug</div>
-      <div class="mob-item">3×12–15 — Extensiones lumbares</div>
-    </div>
-  </div>
-  <div style="margin-top:8px;font-size:11px;color:#555">📋 Duración estimada: ~65–75 min</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700">DÍA 3 · MIÉRCOLES</div><div style="font-size:22px;font-weight:900;text-transform:uppercase">HOMBRO COMPLETO</div></div><span class="tag-badge">DELTOIDES</span></div>
+  <div class="block"><div class="block-title">A) Fuerza — Press Vertical</div><div class="sets-table"><div class="sets-header"><span>SERIE</span><span style="text-align:center">REPS</span><span style="text-align:center">%RM</span></div><div class="set-row"><div class="set-series">Serie 1</div><div class="set-reps">5</div><div class="set-pct">60%</div></div><div class="set-row"><div class="set-series">Serie 2</div><div class="set-reps">4</div><div class="set-pct">70%</div></div><div class="set-row"><div class="set-series">Series 3–6</div><div class="set-reps">8–10</div><div class="set-pct">73%</div></div></div></div>
+  <div class="block"><div class="block-title">B) Deltoides Lateral + Posterior</div><div class="ex-table"><div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESC.</span><span></span></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Elevaciones laterales con mancuernas</div><div class="ex-sets">4</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo ligeramente doblado</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Face pulls en polea alta</div><div class="ex-sets">4</div><div class="ex-data">15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Rotación externa, codos altos</div></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Pájaro con mancuernas (inclinado)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pecho apoyado en banco, deltoides posterior</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press militar sentado (mancuernas)</div><div class="ex-sets">3</div><div class="ex-data">10–12</div><div class="ex-rest">75s</div><div></div></div></div><div class="ex-row"><div class="ex-row-grid"><div class="ex-name">Encogimientos de hombros (mancuernas)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">45s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Trapecio superior, pausa arriba 1s</div></div></div></div>
+  <div class="block"><div class="block-title">ZONA CORE</div><div class="mob-list"><div class="mob-item">3×8/8 — Press Pallof</div><div class="mob-item">3×20 — Dead bug</div><div class="mob-item">3×12–15 — Extensiones lumbares</div></div></div>
 </div>
 
 <!-- DÍA 4 -->
 <div id="day-3" class="day-panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-    <div>
-      <div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700">DÍA 4 · JUEVES</div>
-      <div style="font-size:22px;font-weight:900;text-transform:uppercase">PECHO UPPER + ESPALDA UPPER</div>
-    </div>
-    <span class="tag-badge">PULL &amp; PUSH</span>
-  </div>
-  <div class="ex-table">
-    <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-    <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press inclinado con barra</div><div class="ex-sets">4</div><div class="ex-data">8–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pecho alto, clavicular</div></div>
-    <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Dominadas (pull-ups)</div><div class="ex-sets">4</div><div class="ex-data">Max / asist.</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Rango completo</div></div>
-    <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Aperturas inclinadas con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div></div></div></div>
-    <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Remo en máquina (chest supported)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Sin trapecio</div></div>
-    <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Crossover en polea baja (pecho bajo)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div></div></div></div>
-    <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Jalón polea al pecho a una mano</div><div class="ex-sets">3</div><div class="ex-data">12 c/u</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo fijo, rotación del torso controlada</div></div>
-    <div class="ex-row"><div class="ex-row-grid"><div class="ex-name">Encogimientos de hombros con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Trapecio superior</div></div>
-  </div>
-  <div style="margin-top:8px;font-size:11px;color:#555">📋 7 ejercicios · Duración estimada: ~60–70 min</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700">DÍA 4 · JUEVES</div><div style="font-size:22px;font-weight:900;text-transform:uppercase">PECHO UPPER + ESPALDA UPPER</div></div><span class="tag-badge">PULL &amp; PUSH</span></div>
+  <div class="ex-table"><div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESC.</span><span></span></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press inclinado con barra</div><div class="ex-sets">4</div><div class="ex-data">8–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pecho alto, clavicular</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Dominadas (pull-ups)</div><div class="ex-sets">4</div><div class="ex-data">Max / asist.</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Rango completo</div></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Press banca plano con mancuernas</div><div class="ex-sets">4</div><div class="ex-data">6–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Subir peso progresivamente cada serie</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Aperturas inclinadas con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div></div></div></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Remo en máquina (chest supported)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Sin trapecio</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Crossover en polea baja (pecho bajo)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div></div></div></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Jalón polea al pecho a una mano</div><div class="ex-sets">3</div><div class="ex-data">12 c/u</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Codo fijo, rotación controlada</div></div><div class="ex-row"><div class="ex-row-grid"><div class="ex-name">Encogimientos de hombros (mancuernas)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Trapecio superior</div></div></div>
 </div>
 
 <!-- DÍA 5 -->
 <div id="day-4" class="day-panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-    <div>
-      <div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700">DÍA 5 · VIERNES</div>
-      <div style="font-size:22px;font-weight:900;text-transform:uppercase">PIERNA COMPLETA</div>
-    </div>
-    <span class="tag-badge">TREN INFERIOR</span>
-  </div>
-
-  <div class="block">
-    <div style="background:#111;border:1px solid #2a2a2a;border-left:3px solid #e63030;border-top:2px solid #e63030;padding:12px 14px;margin-bottom:4px">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;color:#e63030;font-weight:700;text-transform:uppercase;margin-bottom:8px">Sentadilla con Barra — % del 1RM</div>
-      <div style="background:#0e0e0e;border:1px solid #1e1e1e;overflow:hidden">
-        <div style="display:grid;grid-template-columns:1fr 60px 80px;background:#141414;padding:8px 12px;font-size:10px;color:#555;letter-spacing:2px;font-weight:700;border-bottom:1px solid #1e1e1e"><span>SERIE</span><span style="text-align:center">REPS</span><span style="text-align:center">%RM</span></div>
-        <div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Serie 1</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">10</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">60%</span></div>
-        <div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a;background:#111"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Serie 2</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">8</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">65%</span></div>
-        <div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Series 3–5</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">6–8</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">70%</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-title">A) Cuádriceps</div>
-    <div class="ex-table">
-      <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Extensión de cuádriceps en máquina</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 No bloquear rodilla, pausa arriba 1s</div></div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-title">B) Isquiotibiales + Glúteos</div>
-    <div class="ex-table">
-      <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Romanian Deadlift (RDL)</div><div class="ex-sets">4</div><div class="ex-data">8–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Estiramiento completo de isquio</div></div>
-      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Curl de isquiotibiales (tumbado)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div></div></div></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Sentadilla búlgara con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">10 c/u</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pie trasero elevado, rodilla trasera cerca del suelo</div></div>
-      <div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Abductores en máquina</div><div class="ex-sets">3</div><div class="ex-data">15</div><div class="ex-rest">45s</div><div></div></div></div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-title">C) Gemelos</div>
-    <div class="ex-table">
-      <div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESCANSO</span><span></span></div>
-      <div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Elevación de gemelos de pie</div><div class="ex-sets">4</div><div class="ex-data">15–20</div><div class="ex-rest">45s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pausa arriba 1s, rango completo</div></div>
-      <div class="ex-row" style="background:#0e0e0e"><div class="ex-row-grid"><div class="ex-name">Elevación de gemelos sentado</div><div class="ex-sets">3</div><div class="ex-data">15–20</div><div class="ex-rest">45s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Cabeza del sóleo</div></div>
-    </div>
-  </div>
-  <div style="margin-top:8px;font-size:11px;color:#555">📋 9 ejercicios · Duración estimada: ~70–80 min</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700">DÍA 5 · VIERNES</div><div style="font-size:22px;font-weight:900;text-transform:uppercase">PIERNA COMPLETA</div></div><span class="tag-badge">TREN INFERIOR</span></div>
+  <div class="block"><div style="background:#111;border:1px solid #2a2a2a;border-left:3px solid #e63030;border-top:2px solid #e63030;padding:12px 14px;margin-bottom:4px"><div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;color:#e63030;font-weight:700;text-transform:uppercase;margin-bottom:8px">Sentadilla con Barra — % del 1RM</div><div style="background:#0e0e0e;border:1px solid #1e1e1e;overflow:hidden"><div style="display:grid;grid-template-columns:1fr 60px 80px;background:#141414;padding:8px 12px;font-size:10px;color:#555;letter-spacing:2px;font-weight:700;border-bottom:1px solid #1e1e1e"><span>SERIE</span><span style="text-align:center">REPS</span><span style="text-align:center">%RM</span></div><div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Serie 1</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">10</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">60%</span></div><div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a;background:#111"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Serie 2</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">8</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">65%</span></div><div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px;border-bottom:1px solid #1a1a1a"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Series 3–6</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">6–8</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">70%</span></div><div style="display:grid;grid-template-columns:1fr 60px 80px;padding:9px 12px"><span style="font-size:13px;color:#aaa;font-family:'Barlow',sans-serif">Series 7–9</span><span style="text-align:center;font-size:14px;font-weight:700;color:#e63030">4–6</span><span style="text-align:center;font-size:12px;color:#888;font-family:'Barlow',sans-serif">80%</span></div></div></div></div>
+  <div class="block"><div class="block-title">A) Cuádriceps</div><div class="ex-table"><div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESC.</span><span></span></div><div class="ex-row"><div class="ex-row-grid"><div class="ex-name">Extensión de cuádriceps en máquina</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 No bloquear rodilla, pausa arriba 1s</div></div></div></div>
+  <div class="block"><div class="block-title">B) Isquiotibiales + Glúteos</div><div class="ex-table"><div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESC.</span><span></span></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Romanian Deadlift (RDL)</div><div class="ex-sets">4</div><div class="ex-data">8–10</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Estiramiento completo de isquio</div></div><div class="ex-row" style="background:#0e0e0e;border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Curl de isquiotibiales (tumbado)</div><div class="ex-sets">3</div><div class="ex-data">12–15</div><div class="ex-rest">60s</div><div></div></div></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Sentadilla búlgara con mancuernas</div><div class="ex-sets">3</div><div class="ex-data">10 c/u</div><div class="ex-rest">90s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pie trasero elevado, rodilla trasera cerca del suelo</div></div><div class="ex-row" style="background:#0e0e0e"><div class="ex-row-grid"><div class="ex-name">Abductores en máquina</div><div class="ex-sets">3</div><div class="ex-data">15</div><div class="ex-rest">45s</div><div></div></div></div></div></div>
+  <div class="block"><div class="block-title">C) Gemelos</div><div class="ex-table"><div class="ex-table-header"><span>EJERCICIO</span><span style="text-align:center">SERIES</span><span style="text-align:center">REPS</span><span style="text-align:center">DESC.</span><span></span></div><div class="ex-row" style="border-bottom:1px solid #1a1a1a"><div class="ex-row-grid"><div class="ex-name">Elevación de gemelos de pie</div><div class="ex-sets">4</div><div class="ex-data">15–20</div><div class="ex-rest">45s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Pausa arriba 1s, rango completo</div></div><div class="ex-row" style="background:#0e0e0e"><div class="ex-row-grid"><div class="ex-name">Elevación de gemelos sentado</div><div class="ex-sets">3</div><div class="ex-data">15–20</div><div class="ex-rest">45s</div><div><button class="info-btn" onclick="toggleNote(this)">i</button></div></div><div class="note-row">💬 Cabeza del sóleo</div></div></div></div>
 </div>
 
-<!-- FOOTER -->
+<!-- REGISTRO SEMANAL -->
+<div id="day-5" class="day-panel">
+  <div style="margin-bottom:14px"><div style="font-size:10px;color:#e63030;letter-spacing:3px;font-weight:700;margin-bottom:4px">FEEDBACK SEMANAL</div><div style="font-size:22px;font-weight:900;text-transform:uppercase">¿Cómo te fue esta semana?</div><div style="font-size:11px;color:#888;font-family:'Barlow',sans-serif;margin-top:4px">Llena este registro y envíalo a tu entrenador</div></div>
+  <form action="https://formsubmit.co/liftflow360@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="📊 Registro semanal — Abraham">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://liftflow-abraham.netlify.app">
+    <div class="reg-table" style="margin-bottom:14px">
+      <div class="reg-header"><span>PREGUNTA</span><span>TU RESPUESTA</span></div>
+      <div class="reg-row"><div class="reg-label">¿Cómo te sentiste en general? (1–10)</div><div><input class="reg-input" type="number" name="sensacion_general" min="1" max="10" placeholder="1–10" required></div></div>
+      <div class="reg-row"><div class="reg-label">Ejercicio que más te costó</div><div><input class="reg-input" type="text" name="ejercicio_mas_dificil" placeholder="Ej: Sentadilla, press..."></div></div>
+      <div class="reg-row"><div class="reg-label">Dificultad del ejercicio (1–10)</div><div><input class="reg-input" type="number" name="dificultad_ejercicio" min="1" max="10" placeholder="1–10"></div></div>
+      <div class="reg-row"><div class="reg-label">¿Qué tal dormiste? (1–10)</div><div><input class="reg-input" type="number" name="calidad_sueno" min="1" max="10" placeholder="1–10"></div></div>
+      <div class="reg-row"><div class="reg-label">¿Qué tal tu alimentación? (1–10)</div><div><input class="reg-input" type="number" name="alimentacion" min="1" max="10" placeholder="1–10"></div></div>
+      <div class="reg-row"><div class="reg-label">Motivación general (1–10)</div><div><input class="reg-input" type="number" name="motivacion" min="1" max="10" placeholder="1–10"></div></div>
+    </div>
+    <div style="margin-bottom:14px"><div class="block-title">Comentarios adicionales</div><textarea class="reg-textarea" name="comentarios" placeholder="¿Algo más? Dolores, logros, dudas..." style="width:100%;min-height:80px;margin-top:2px"></textarea></div>
+    <button type="submit" class="send-btn">📩 Enviar registro a mi entrenador →</button>
+  </form>
+  <div style="font-size:11px;color:#555;font-family:'Barlow',sans-serif;line-height:1.6;text-align:center;margin-top:10px">⚠️ Al enviar, el registro llega directamente al correo de tu entrenador.</div>
+</div>
+
 <div style="border-top:1px solid #1a1a1a;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:8px">
   <span style="font-size:11px;color:#333;letter-spacing:3px;font-weight:700">LIFT-FLOW</span>
   <span style="font-size:10px;color:#333;font-family:'Barlow',sans-serif">Levántate. Fluye. Repite.</span>
